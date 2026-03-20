@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josetti & Romero Advocacia e Consultoria Jurídica</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Animate On Scroll (AOS) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        marsala: {
+                            50: '#F9E8EA',
+                            100: '#F0D1D5',
+                            200: '#E0A3AB',
+                            300: '#C97580',
+                            400: '#B3525F',
+                            500: '#9B3A47',
+                            600: '#803A41',
+                            700: '#6A3036',
+                            800: '#582A2F',
+                            900: '#4A2428',
+                        },
+                        beige: {
+                            50: '#FDFBF7',
+                            100: '#F9F6EE',
+                            200: '#F5F1E8',
+                            300: '#EBE0D0',
+                            400: '#DFCDB5',
+                            500: '#D4B89A',
+                        },
+                        moss: {
+                            50: '#F4F7F2',
+                            100: '#E4EDDC',
+                            200: '#C9DBB8',
+                            300: '#A5C18F',
+                            400: '#82A869',
+                            500: '#6B8E5C',
+                            600: '#557348',
+                            700: '#455C3B',
+                            800: '#3A4C32',
+                            900: '#32402B',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        body: ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .gradient-marsala {
+            background: linear-gradient(135deg, #803A41 0%, #6A3036 100%);
+        }
+
+        .gradient-moss {
+            background: linear-gradient(135deg, #6B8E5C 0%, #557348 100%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #803A41 0%, #6B8E5C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(128, 58, 65, 0.15);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #803A41;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23803A41' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+
+<body class="font-body bg-beige-50 text-gray-800" x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 50)">
+
+    <!-- ==================== HEADER/NAVIGATION ==================== -->
+    <header
+        class="fixed w-full top-0 z-50 transition-all duration-300"
+        :class="scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'"
+    >
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 gradient-marsala rounded-lg flex items-center justify-center">
+                        <i class="fas fa-balance-scale text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-heading font-bold text-lg text-marsala-700">Josetti & Romero</h1>
+                        <p class="text-xs text-gray-600">Advocacia e Consultoria Jurídica</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-marsala-600 font-medium transition-colors">Home</a>
+                    <a href="#escritorio" class="nav-link text-gray-700 hover:text-marsala-600 font-medium transition-colors">O Escritório</a>
+                    <a href="#areas" class="nav-link text-gray-700 hover:text-marsala-600 font-medium transition-colors">Áreas de Atuação</a>
+                    <a href="#equipe" class="nav-link text-gray-700 hover:text-marsala-600 font-medium transition-colors">Equipe</a>
+                    <a href="#contato" class="nav-link text-gray-700 hover:text-marsala-600 font-medium transition-colors">Contato</a>
+                    <a href="https://wa.me/5567999999999" target="_blank" class="gradient-marsala text-white px-6 py-2.5 rounded-full font-medium hover:shadow-lg transition-all duration-300 hover:scale-105">
+                        <i class="fab fa-whatsapp mr-2"></i>Contato Rápido
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button
+                    @click="mobileMenuOpen = !mobileMenuOpen"
+                    class="md:hidden text-marsala-700 focus:outline-none"
+                >
+                    <i class="fas fa-bars text-2xl" x-show="!mobileMenuOpen"></i>
+                    <i class="fas fa-times text-2xl" x-show="mobileMenuOpen"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div
+                x-show="mobileMenuOpen"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 -translate-y-4"
+                x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 -translate-y-4"
+                class="md:hidden mt-4 pb-4 bg-white rounded-xl shadow-xl"
+            >
+                <div class="flex flex-col space-y-3 px-4 py-4">
+                    <a href="#home" @click="mobileMenuOpen = false" class="text-gray-700 hover:text-marsala-600 font-medium py-2">Home</a>
+                    <a href="#escritorio" @click="mobileMenuOpen = false" class="text-gray-700 hover:text-marsala-600 font-medium py-2">O Escritório</a>
+                    <a href="#areas" @click="mobileMenuOpen = false" class="text-gray-700 hover:text-marsala-600 font-medium py-2">Áreas de Atuação</a>
+                    <a href="#equipe" @click="mobileMenuOpen = false" class="text-gray-700 hover:text-marsala-600 font-medium py-2">Equipe</a>
+                    <a href="#contato" @click="mobileMenuOpen = false" class="text-gray-700 hover:text-marsala-600 font-medium py-2">Contato</a>
+                    <a href="https://wa.me/5567999999999" target="_blank" class="gradient-marsala text-white px-6 py-3 rounded-full font-medium text-center">
+                        <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center hero-pattern bg-gradient-to-br from-beige-100 via-white to-marsala-50">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-marsala-200 rounded-full opacity-20 blur-3xl"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-moss-200 rounded-full opacity-20 blur-3xl"></div>
+        </div>
+
+        <div class="container mx-auto px-6 py-32 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div data-aos="fade-down" data-aos-duration="1000">
+                    <span class="inline-block bg-marsala-100 text-marsala-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                        <i class="fas fa-star mr-2"></i>Excelência em Advocacia
+                    </span>
+                </div>
+
+                <h1
+                    data-aos="fade-up"
+                    data-aos-duration="1000"
+                    data-aos-delay="200"
+                    class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
+                >
+                    Josetti & Romero<br>
+                    <span class="text-gradient">Advocacia e Consultoria Jurídica</span>
+                </h1>
+
+                <p
+                    data-aos="fade-up"
+                    data-aos-duration="1000"
+                    data-aos-delay="400"
+                    class="text-lg md:text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed"
+                >
+                    Atuação jurídica estratégica nas áreas criminal, eleitoral, contratos e direito público,
+                    com atendimento personalizado e foco na defesa dos direitos do cliente.
+                </p>
+
+                <div
+                    data-aos="fade-up"
+                    data-aos-duration="1000"
+                    data-aos-delay="600"
+                    class="flex flex-col sm:flex-row gap-4 justify-center"
+                >
+                    <a href="https://wa.me/5567999999999" target="_blank" class="gradient-marsala text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all duration-300 hover:scale-105 inline-flex items-center justify-center">
+                        <i class="fab fa-whatsapp mr-3 text-xl"></i>
+                        Fale Conosco Agora
+                    </a>
+                    <a href="#areas" class="border-2 border-marsala-600 text-marsala-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-marsala-600 hover:text-white transition-all duration-300 inline-flex items-center justify-center">
+                        Conheça Nossas Áreas
+                        <i class="fas fa-arrow-right ml-3"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#escritorio" class="text-marsala-600">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==================== ÁREAS EM DESTAQUE (HOME) ==================== -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div data-aos="zoom-in" data-aos-delay="0" class="card-hover bg-beige-100 rounded-xl p-6 text-center cursor-pointer hover:bg-marsala-600 hover:text-white transition-all duration-300">
+                    <i class="fas fa-gavel text-3xl text-marsala-600 mb-3 hover:text-white"></i>
+                    <h3 class="font-heading font-semibold">Direito Criminal</h3>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="100" class="card-hover bg-beige-100 rounded-xl p-6 text-center cursor-pointer hover:bg-marsala-600 hover:text-white transition-all duration-300">
+                    <i class="fas fa-vote-yea text-3xl text-marsala-600 mb-3 hover:text-white"></i>
+                    <h3 class="font-heading font-semibold">Direito Eleitoral</h3>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="200" class="card-hover bg-beige-100 rounded-xl p-6 text-center cursor-pointer hover:bg-marsala-600 hover:text-white transition-all duration-300">
+                    <i class="fas fa-file-contract text-3xl text-marsala-600 mb-3 hover:text-white"></i>
+                    <h3 class="font-heading font-semibold">Contratos</h3>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="300" class="card-hover bg-beige-100 rounded-xl p-6 text-center cursor-pointer hover:bg-marsala-600 hover:text-white transition-all duration-300">
+                    <i class="fas fa-handshake text-3xl text-marsala-600 mb-3 hover:text-white"></i>
+                    <h3 class="font-heading font-semibold">Procedimentos Extrajudiciais</h3>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="400" class="card-hover bg-beige-100 rounded-xl p-6 text-center cursor-pointer hover:bg-marsala-600 hover:text-white transition-all duration-300">
+                    <i class="fas fa-landmark text-3xl text-marsala-600 mb-3 hover:text-white"></i>
+                    <h3 class="font-heading font-semibold">Direito Público</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== O ESCRITÓRIO ==================== -->
+    <section id="escritorio" class="py-24 bg-gradient-to-br from-beige-200 to-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span data-aos="fade-up" class="inline-block bg-moss-100 text-moss-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                    Sobre Nós
+                </span>
+                <h2 data-aos="fade-up" data-aos-delay="100" class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    O Escritório
+                </h2>
+                <div data-aos="fade-up" data-aos-delay="200" class="w-20 h-1 gradient-marsala mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Quem Somos -->
+                <div data-aos="fade-up" data-aos-delay="0" class="bg-white rounded-2xl p-8 shadow-lg card-hover border-t-4 border-marsala-600">
+                    <div class="w-14 h-14 gradient-marsala rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-gray-900 mb-4">Quem Somos</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Somos um escritório de advocacia comprometido com a excelência e a ética profissional.
+                        Nossa equipe é formada por advogadas especializadas com vasta experiência acadêmica e prática.
+                    </p>
+                </div>
+
+                <!-- Nossa Missão -->
+                <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-2xl p-8 shadow-lg card-hover border-t-4 border-moss-500">
+                    <div class="w-14 h-14 gradient-moss rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-bullseye text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-gray-900 mb-4">Nossa Missão</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Oferecer soluções jurídicas estratégicas e personalizadas, defendendo os direitos
+                        de nossos clientes com dedicação, transparência e compromisso com a justiça.
+                    </p>
+                </div>
+
+                <!-- Nossa Forma de Atuação -->
+                <div data-aos="fade-up" data-aos-delay="200" class="bg-white rounded-2xl p-8 shadow-lg card-hover border-t-4 border-marsala-600">
+                    <div class="w-14 h-14 gradient-marsala rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chess text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-gray-900 mb-4">Nossa Forma de Atuação</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Atuação estratégica e personalizada, combinando conhecimento técnico aprofundado
+                        com abordagem prática e eficiente para cada caso.
+                    </p>
+                </div>
+
+                <!-- Ética -->
+                <div data-aos="fade-up" data-aos-delay="300" class="bg-white rounded-2xl p-8 shadow-lg card-hover border-t-4 border-moss-500">
+                    <div class="w-14 h-14 gradient-moss rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-handshake text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-gray-900 mb-4">Ética</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Compromisso inegociável com os princípios éticos da advocacia,
+                        garantindo confidencialidade, lealdade e integridade em todas as relações.
+                    </p>
+                </div>
+
+                <!-- Atuação Estratégica -->
+                <div data-aos="fade-up" data-aos-delay="400" class="bg-white rounded-2xl p-8 shadow-lg card-hover border-t-4 border-marsala-600">
+                    <div class="w-14 h-14 gradient-marsala rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-lightbulb text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-gray-900 mb-4">Atuação Estratégica</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Desenvolvimento de estratégias jurídicas personalizadas para cada caso,
+                        maximizando as chances de sucesso com planejamento e precisão.
+                    </p>
+                </div>
+
+                <!-- Experiência Acadêmica -->
+                <div data-aos="fade-up" data-aos-delay="500" class="bg-white rounded-2xl p-8 shadow-lg card-hover border-t-4 border-moss-500">
+                    <div class="w-14 h-14 gradient-moss rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-gray-900 mb-4">Experiência Acadêmica</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Nossas sócias possuem sólida formação acadêmica, com pós-graduações
+                        e especializações nas principais áreas do direito.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== VÍDEO DE APRESENTAÇÃO ==================== -->
+    <section class="py-24 bg-beige-100 relative overflow-hidden">
+        <!-- Elementos Decorativos de Fundo -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-marsala-100 rounded-full blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-64 h-64 bg-moss-100 rounded-full blur-3xl opacity-30 translate-x-1/2 translate-y-1/2"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <span data-aos="fade-up" class="inline-block bg-white text-marsala-700 border border-marsala-200 px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-sm">
+                    <i class="fas fa-play-circle mr-2"></i>Conheça Nosso Espaço
+                </span>
+                <h2 data-aos="fade-up" data-aos-delay="100" class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Uma Visita ao Escritório
+                </h2>
+                <p data-aos="fade-up" data-aos-delay="200" class="text-gray-600 max-w-2xl mx-auto">
+                    Convidamos você a conhecer nossa estrutura moderna e acolhedora, preparada para oferecer o melhor atendimento jurídico.
+                </p>
+            </div>
+
+            <!-- Container do Vídeo (Responsivo 16:9) -->
+            <div data-aos="zoom-in" data-aos-delay="300" class="max-w-4xl mx-auto">
+                <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black group">
+                    <!-- Overlay sutil antes de clicar (opcional, melhora estética) -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-10"></div>
+
+                    <!-- Ícone de Play Centralizado (Decorativo) -->
+                    <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none group-hover:scale-110 transition-transform duration-500">
+                        <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/40">
+                            <i class="fas fa-play text-white text-2xl ml-1"></i>
+                        </div>
+                    </div>
+
+                    <!-- Iframe do Vídeo -->
+                    <!-- Substitua o 'src' pelo link do vídeo real quando receber -->
+                    <iframe
+                        class="w-full h-full"
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                        title="Apresentação do Escritório"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- Legenda ou Citação abaixo do vídeo -->
+                <div data-aos="fade-up" data-aos-delay="400" class="mt-8 text-center">
+                    <p class="font-heading italic text-marsala-700 text-lg">
+                        "Excelência e tradição em cada detalhe do nosso atendimento."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==================== ÁREAS DE ATUAÇÃO ==================== -->
+    <section id="areas" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span data-aos="fade-up" class="inline-block bg-marsala-100 text-marsala-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                    Nossas Especialidades
+                </span>
+                <h2 data-aos="fade-up" data-aos-delay="100" class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Áreas de Atuação
+                </h2>
+                <p data-aos="fade-up" data-aos-delay="200" class="text-gray-600 max-w-2xl mx-auto">
+                    Conheça nossas áreas de expertise e como podemos ajudar você
+                </p>
+                <div data-aos="fade-up" data-aos-delay="300" class="w-20 h-1 gradient-marsala mx-auto rounded-full mt-6"></div>
+            </div>
+
+            <!-- Direito Criminal -->
+            <div data-aos="fade-up" class="mb-16">
+                <div class="bg-gradient-to-r from-marsala-600 to-marsala-700 rounded-2xl p-8 mb-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-gavel text-white text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-bold text-white">Direito Criminal</h3>
+                            <p class="text-marsala-100">Defesa especializada em matéria penal</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Audiência de custódia</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Habeas corpus</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Liberdade provisória</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Violência doméstica</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Lei de drogas</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Inquérito policial</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Crimes contra dignidade sexual</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Lavagem de dinheiro</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Organização criminosa</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Estatuto do desarmamento</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Liberação de bens</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Descaminho e contrabando</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Acordo de não persecução penal</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Crimes contra honra</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Crimes de menor potencial ofensivo</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Crimes contra o sistema financeiro</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Crimes de trânsito</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direito Eleitoral -->
+            <div data-aos="fade-up" class="mb-16">
+                <div class="bg-gradient-to-r from-moss-500 to-moss-600 rounded-2xl p-8 mb-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-vote-yea text-white text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-bold text-white">Direito Eleitoral</h3>
+                            <p class="text-moss-100">Assessoria completa em matéria eleitoral</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-moss-500 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-marsala-600 mr-2 hover:text-white"></i>
+                        <span>Registro de candidatura</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-moss-500 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-marsala-600 mr-2 hover:text-white"></i>
+                        <span>Impugnação ao registro de candidatura</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-moss-500 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-marsala-600 mr-2 hover:text-white"></i>
+                        <span>Captacao ilícita de sufrágio</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-moss-500 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-marsala-600 mr-2 hover:text-white"></i>
+                        <span>Propaganda eleitoral antecipada</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-moss-500 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-marsala-600 mr-2 hover:text-white"></i>
+                        <span>Cassação de mandato</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contratos -->
+            <div data-aos="fade-up" class="mb-16">
+                <div class="bg-gradient-to-r from-marsala-600 to-marsala-700 rounded-2xl p-8 mb-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-file-contract text-white text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-bold text-white">Contratos</h3>
+                            <p class="text-marsala-100">Elaboração e revisão contratual</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Compromisso de compra e venda</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Contratos de locação</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Arrendamento</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Distratos</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Aditivos contratuais</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Procedimentos Extrajudiciais -->
+            <div data-aos="fade-up" class="mb-16">
+                <div class="bg-gradient-to-r from-moss-500 to-moss-600 rounded-2xl p-8 mb-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-handshake text-white text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-bold text-white">Procedimentos Extrajudiciais</h3>
+                            <p class="text-moss-100">Soluções ágeis fora do judiciário</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-moss-500 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-marsala-600 mr-2 hover:text-white"></i>
+                        <span>Notificações extrajudiciais</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-moss-500 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-marsala-600 mr-2 hover:text-white"></i>
+                        <span>Intermediação de acordos extrajudiciais</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-moss-500 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-marsala-600 mr-2 hover:text-white"></i>
+                        <span>Defesa em processos administrativos éticos</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-moss-500 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-marsala-600 mr-2 hover:text-white"></i>
+                        <span>Defesa em autos de infração</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Direito Público -->
+            <div data-aos="fade-up">
+                <div class="bg-gradient-to-r from-marsala-600 to-marsala-700 rounded-2xl p-8 mb-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-landmark text-white text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-bold text-white">Direito Público</h3>
+                            <p class="text-marsala-100">Especialidade da Dra. Natália</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Direito Administrativo</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Direito Constitucional</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Direito do Consumidor</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Direito Imobiliário</span>
+                    </div>
+                    <div class="bg-beige-100 rounded-xl p-4 hover:bg-marsala-600 hover:text-white transition-all duration-300 card-hover cursor-pointer">
+                        <i class="fas fa-check text-moss-500 mr-2 hover:text-white"></i>
+                        <span>Direito das Famílias</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== EQUIPE ==================== -->
+    <section id="equipe" class="py-24 bg-gradient-to-br from-beige-200 to-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span data-aos="fade-up" class="inline-block bg-moss-100 text-moss-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                    Nossa Equipe
+                </span>
+                <h2 data-aos="fade-up" data-aos-delay="100" class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Advogadas
+                </h2>
+                <div data-aos="fade-up" data-aos-delay="200" class="w-20 h-1 gradient-marsala mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Amanda Romero -->
+                <div data-aos="fade-right" data-aos-delay="0" class="bg-white rounded-2xl overflow-hidden shadow-xl card-hover">
+                    <div class="h-64 bg-gradient-to-br from-marsala-200 to-marsala-100 flex items-center justify-center">
+                        <div class="w-40 h-40 rounded-full bg-white shadow-lg flex items-center justify-center overflow-hidden">
+                            <i class="fas fa-user text-6xl text-marsala-400"></i>
+                            <!-- Substituir por: <img src="foto-amanda.jpg" alt="Amanda Romero" class="w-full h-full object-cover"> -->
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">Amanda Romero do Espírito Santo</h3>
+                        <p class="text-marsala-600 font-semibold mb-4">OAB/MS 22.127</p>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Professora e advogada sócia no escritório Josetti & Romero Advocacia e Consultoria Jurídica.
+                            Pós-graduada em Direito Penal e Processual Penal pela EDAMP – Escola de Direito do Ministério Público.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            <span class="font-semibold text-marsala-600">Atua nas áreas de:</span> Direito Criminal, Processual Penal, Eleitoral,
+                            Procedimentos Extrajudiciais e Contratos.
+                        </p>
+                        <div class="mt-6 flex space-x-4">
+                            <a href="https://wa.me/5567999999999" class="text-moss-500 hover:text-moss-600 text-2xl transition-colors">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="mailto:amanda@josettiromero.com.br" class="text-marsala-600 hover:text-marsala-700 text-2xl transition-colors">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="text-blue-600 hover:text-blue-700 text-2xl transition-colors">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Natália -->
+                <div data-aos="fade-left" data-aos-delay="200" class="bg-white rounded-2xl overflow-hidden shadow-xl card-hover">
+                    <div class="h-64 bg-gradient-to-br from-moss-200 to-moss-100 flex items-center justify-center">
+                        <div class="w-40 h-40 rounded-full bg-white shadow-lg flex items-center justify-center overflow-hidden">
+                            <i class="fas fa-user text-6xl text-moss-400"></i>
+                            <!-- Substituir por: <img src="foto-natalia.jpg" alt="Natália" class="w-full h-full object-cover"> -->
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">Natália XXXXX</h3>
+                        <p class="text-moss-600 font-semibold mb-4">OAB/MS XXXXX</p>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Advogada especialista em Direito Público com mais de dez anos de experiência nas áreas de
+                            Direito Administrativo, Constitucional, Consumidor, Imobiliário e Direito das Famílias.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            Professora da Faculdade Novoeste e de cursos preparatórios para concursos e OAB.
+                            Ex-aluna especial do mestrado em Direito pela UFMS e certificada Analista Comportamental PSC.
+                        </p>
+                        <div class="mt-6 flex space-x-4">
+                            <a href="https://wa.me/5567999999999" class="text-moss-500 hover:text-moss-600 text-2xl transition-colors">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="mailto:natalia@josettiromero.com.br" class="text-marsala-600 hover:text-marsala-700 text-2xl transition-colors">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="text-blue-600 hover:text-blue-700 text-2xl transition-colors">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTATO ==================== -->
+    <section id="contato" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span data-aos="fade-up" class="inline-block bg-marsala-100 text-marsala-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                    Entre em Contato
+                </span>
+                <h2 data-aos="fade-up" data-aos-delay="100" class="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Fale Conosco
+                </h2>
+                <p data-aos="fade-up" data-aos-delay="200" class="text-gray-600 max-w-2xl mx-auto">
+                    Estamos prontos para atender você. Entre em contato pelos nossos canais.
+                </p>
+                <div data-aos="fade-up" data-aos-delay="300" class="w-20 h-1 gradient-marsala mx-auto rounded-full mt-6"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Informações de Contato -->
+                <div data-aos="fade-right">
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-14 h-14 gradient-marsala rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-gray-900 text-lg">Telefone</h4>
+                                <p class="text-gray-600">(67) 99999-9999</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-14 h-14 gradient-moss rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fab fa-whatsapp text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-gray-900 text-lg">WhatsApp</h4>
+                                <p class="text-gray-600">(67) 99999-9999</p>
+                                <a href="https://wa.me/5567999999999" target="_blank" class="text-moss-600 hover:text-moss-700 font-medium inline-flex items-center mt-2">
+                                    Iniciar conversa <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-14 h-14 gradient-marsala rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-gray-900 text-lg">E-mail</h4>
+                                <p class="text-gray-600">contato@josettiromero.com.br</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-14 h-14 gradient-moss rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-gray-900 text-lg">Endereço</h4>
+                                <p class="text-gray-600">Rua Exemplo, 123 - Centro<br>Campo Grande - MS</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-6">
+                            <a href="https://wa.me/5567999999999" target="_blank" class="gradient-marsala text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all duration-300 hover:scale-105 inline-flex items-center">
+                                <i class="fab fa-whatsapp mr-3 text-xl"></i>
+                                Falar no WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mapa do Google -->
+                <div data-aos="fade-left">
+                    <div class="bg-beige-100 rounded-2xl overflow-hidden shadow-lg h-96">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.0!2d-54.6!3d-20.4!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDI0JzAwLjAiUyA1NMKwMzYnMDAuMCJX!5e0!3m2!1spt-BR!2sbr!4v1234567890"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="gradient-marsala text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- Logo e Descrição -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-balance-scale text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading font-bold text-xl">Josetti & Romero</h3>
+                            <p class="text-sm text-marsala-200">Advocacia e Consultoria Jurídica</p>
+                        </div>
+                    </div>
+                    <p class="text-marsala-100 leading-relaxed mb-4">
+                        Atuação jurídica estratégica com atendimento personalizado e foco na defesa dos direitos do cliente.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-marsala-100 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#escritorio" class="text-marsala-100 hover:text-white transition-colors">O Escritório</a></li>
+                        <li><a href="#areas" class="text-marsala-100 hover:text-white transition-colors">Áreas de Atuação</a></li>
+                        <li><a href="#equipe" class="text-marsala-100 hover:text-white transition-colors">Equipe</a></li>
+                        <li><a href="#contato" class="text-marsala-100 hover:text-white transition-colors">Contato</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contato -->
+                <div>
+                    <h4 class="font-heading font-bold text-lg mb-4">Contato</h4>
+                    <ul class="space-y-2 text-marsala-100">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>(67) 99999-9999</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>(67) 99999-9999</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@josettiromero.com.br</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-marsala-400 pt-8 text-center">
+                <p class="text-marsala-200">
+                    &copy; 2026 Josetti & Romero Advocacia e Consultoria Jurídica. Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão WhatsApp Flutuante -->
+    <a
+        href="https://wa.me/5567999999999"
+        target="_blank"
+        class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110 z-50 animate-bounce"
+        x-show="scrolled"
+        x-transition
+    >
+        <i class="fab fa-whatsapp text-white text-3xl"></i>
+    </a>
+
+    <!-- Initialize AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>

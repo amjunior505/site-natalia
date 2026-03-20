@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josetti & Romero | Advocacia e Consultoria Jurídica</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        marsala: '#722F37',
+                        bege: '#F5F5DC',
+                        begeDark: '#E5E5CA',
+                        verdeMusgo: '#4E5D4C',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px); }
+        .bg-hero { background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000'); }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-sans leading-relaxed">
+
+    <nav x-data="{ open: false, scrolled: false }"
+         @scroll.window="scrolled = (window.pageYOffset > 50)"
+         :class="scrolled ? 'glass shadow-lg py-3' : 'bg-transparent py-6'"
+         class="fixed w-full z-50 transition-all duration-500 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-xl md:text-2xl font-serif font-bold tracking-tight transition-colors duration-500"
+                 :class="scrolled ? 'text-marsala' : 'text-white'">
+                JOSETTI & ROMERO
+            </div>
+
+            <div class="hidden md:flex space-x-8 font-semibold text-xs uppercase tracking-[0.2em]"
+                 :class="scrolled ? 'text-gray-700' : 'text-white'">
+                <a href="#home" class="hover:text-marsala transition">Início</a>
+                <a href="#sobre" class="hover:text-marsala transition">O Escritório</a>
+                <a href="#areas" class="hover:text-marsala transition">Atuação</a>
+                <a href="#equipe" class="hover:text-marsala transition">Equipe</a>
+                <a href="#contato" class="bg-verdeMusgo text-white px-4 py-2 rounded-sm hover:bg-marsala transition">Contato</a>
+            </div>
+
+            <button @click="open = !open" class="md:hidden" :class="scrolled ? 'text-marsala' : 'text-white'">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+
+        <div x-show="open" x-transition class="md:hidden bg-white absolute top-full left-0 w-full shadow-2xl p-8 flex flex-col space-y-6 text-gray-800 font-bold uppercase text-sm tracking-widest">
+            <a @click="open = false" href="#home">Início</a>
+            <a @click="open = false" href="#sobre">O Escritório</a>
+            <a @click="open = false" href="#areas">Atuação</a>
+            <a @click="open = false" href="#equipe">Equipe</a>
+            <a @click="open = false" href="#contato" class="text-marsala">Fale Conosco</a>
+        </div>
+    </nav>
+
+    <section id="home" class="relative h-screen flex items-center justify-center bg-black overflow-hidden">
+        <div class="absolute inset-0 bg-hero bg-cover bg-center opacity-40"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-marsala/40 via-transparent to-black/60"></div>
+
+        <div class="relative z-10 text-center px-4 max-w-5xl" data-aos="fade-up" data-aos-duration="1500">
+            <h1 class="text-4xl md:text-7xl font-serif text-white mb-6 leading-tight">
+                Josetti & Romero <br>
+                <span class="text-bege italic font-light text-2xl md:text-4xl block mt-4">Advocacia e Consultoria Jurídica</span>
+            </h1>
+            <p class="text-lg md:text-xl text-white/90 mb-10 font-light max-w-3xl mx-auto leading-relaxed">
+                Atuação jurídica estratégica nas áreas criminal, eleitoral, contratos e direito público, com atendimento personalizado e foco na defesa dos direitos do cliente.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://wa.me/5567999999999" class="bg-verdeMusgo text-white px-10 py-5 rounded-sm hover:scale-105 transition-transform font-bold tracking-widest text-sm shadow-xl">
+                    WHATSAPP ONLINE
+                </a>
+                <a href="#areas" class="backdrop-blur-md border border-white/30 text-white px-10 py-5 rounded-sm hover:bg-white hover:text-marsala transition-all font-bold tracking-widest text-sm">
+                    NOSSAS ÁREAS
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="py-24 bg-bege">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <span class="text-marsala font-bold tracking-[0.3em] text-sm mb-4 block">INSTITUCIONAL</span>
+                <h2 class="text-marsala font-serif text-5xl mb-8">O Escritório</h2>
+                <div class="space-y-6 text-gray-700 text-lg leading-relaxed">
+                    <p>Focado na <strong>atuação estratégica</strong>, o escritório Josetti & Romero destaca-se pelo atendimento personalizado e pela sólida experiência acadêmica de suas sócias.</p>
+
+                    <div class="grid grid-cols-1 gap-6 mt-8">
+                        <div class="bg-white/50 p-6 rounded-sm border-l-4 border-marsala">
+                            <h4 class="font-bold text-marsala mb-2 uppercase text-sm">Nossa Missão</h4>
+                            <p class="text-base italic">Oferecer soluções jurídicas de alta complexidade com agilidade e rigor técnico.</p>
+                        </div>
+                        <div class="bg-white/50 p-6 rounded-sm border-l-4 border-verdeMusgo">
+                            <h4 class="font-bold text-verdeMusgo mb-2 uppercase text-sm">Nossos Valores</h4>
+                            <p class="text-base italic">Ética inegociável, transparência total e foco absoluto no resultado para o cliente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative" data-aos="fade-left">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=1000" class="rounded-sm shadow-2xl relative z-10" alt="Justiça">
+                <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-marsala z-0"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="areas" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-marsala font-serif text-5xl mb-4">Áreas de Especialidade</h2>
+                <p class="text-gray-500 tracking-[0.2em] uppercase text-xs">Excelência em múltiplas vertentes do Direito</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="p-8 border border-gray-100 bg-bege/20 hover:bg-white hover:shadow-2xl transition-all duration-300 group" data-aos="fade-up">
+                    <div class="w-12 h-12 bg-marsala text-white flex items-center justify-center mb-6 rounded-sm mb-6">⚖️</div>
+                    <h3 class="text-2xl font-serif text-marsala mb-6">Direito Criminal</h3>
+                    <ul class="space-y-3 text-sm text-gray-600 list-disc list-inside">
+                        <li>Audiência de custódia</li>
+                        <li>Habeas corpus / Liberdade provisória</li>
+                        <li>Violência doméstica</li>
+                        <li>Lei de drogas / Inquérito policial</li>
+                        <li>Crimes contra dignidade sexual</li>
+                        <li>Lavagem de dinheiro / Org. criminosa</li>
+                        <li>Estatuto do desarmamento</li>
+                        <li>Acordo de não persecução penal</li>
+                    </ul>
+                </div>
+
+                <div class="p-8 border border-gray-100 bg-bege/20 hover:bg-white hover:shadow-2xl transition-all duration-300 group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 bg-verdeMusgo text-white flex items-center justify-center mb-6 rounded-sm mb-6">🗳️</div>
+                    <h3 class="text-2xl font-serif text-verdeMusgo mb-6">Direito Eleitoral</h3>
+                    <ul class="space-y-3 text-sm text-gray-600 list-disc list-inside">
+                        <li>Registro de candidatura</li>
+                        <li>Impugnação ao registro</li>
+                        <li>Captação ilícita de sufrágio</li>
+                        <li>Propaganda eleitoral antecipada</li>
+                        <li>Cassação de mandato</li>
+                    </ul>
+                </div>
+
+                <div class="p-8 border border-gray-100 bg-bege/20 hover:bg-white hover:shadow-2xl transition-all duration-300 group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 bg-marsala text-white flex items-center justify-center mb-6 rounded-sm mb-6">📄</div>
+                    <h3 class="text-2xl font-serif text-marsala mb-6">Contratos & Extrajudiciais</h3>
+                    <ul class="space-y-3 text-sm text-gray-600 list-disc list-inside">
+                        <li>Compra e venda / Locação</li>
+                        <li>Arrendamento e Distratos</li>
+                        <li>Notificações extrajudiciais</li>
+                        <li>Intermediação de acordos</li>
+                        <li>Defesa em processos éticos</li>
+                        <li>Defesa em autos de infração</li>
+                    </ul>
+                </div>
+
+                <div class="p-8 border border-gray-100 bg-bege/20 hover:bg-white hover:shadow-2xl transition-all duration-300 group md:col-span-2 lg:col-span-3" data-aos="fade-up">
+                    <div class="w-12 h-12 bg-verdeMusgo text-white flex items-center justify-center mb-6 rounded-sm mb-6">🏛️</div>
+                    <h3 class="text-2xl font-serif text-verdeMusgo mb-4 text-center">Direito Público e Especialidades</h3>
+                    <div class="grid md:grid-cols-3 gap-4 text-center text-sm text-gray-600 font-semibold uppercase tracking-wider mt-6">
+                        <div class="p-4 border-b border-verdeMusgo/20">Direito Administrativo</div>
+                        <div class="p-4 border-b border-verdeMusgo/20">Direito Constitucional</div>
+                        <div class="p-4 border-b border-verdeMusgo/20">Direito do Consumidor</div>
+                        <div class="p-4 border-b border-verdeMusgo/20">Direito Imobiliário</div>
+                        <div class="p-4 border-b border-verdeMusgo/20">Direito das Famílias</div>
+                        <div class="p-4 border-b border-verdeMusgo/20">Consultoria Estratégica</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-verdeMusgo relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10" data-aos="zoom-in">
+            <h2 class="font-serif text-4xl mb-12 text-bege">Vídeo de Apresentação</h2>
+            <div class="relative pt-[56.25%] bg-black rounded-sm shadow-2xl overflow-hidden group">
+                <iframe class="absolute inset-0 w-full h-full opacity-80 group-hover:opacity-100 transition-opacity"
+                        src="https://www.youtube.com/embed/XXXXXXX"
+                        title="Apresentação Josetti & Romero" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipe" class="py-24 bg-bege">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-marsala font-serif text-5xl text-center mb-20" data-aos="fade-down">Nossas Sócias</h2>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="bg-white p-8 md:p-12 flex flex-col md:flex-row gap-10 items-start shadow-xl border-t-8 border-marsala" data-aos="fade-up">
+                    <div class="w-full md:w-56 h-72 bg-gray-200 grayscale hover:grayscale-0 transition-all duration-500 overflow-hidden shadow-lg">
+                        <img src="./img/romero.jpeg" class="w-full h-full object-cover" alt="Amanda Romero">
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-3xl font-serif text-marsala mb-1">Amanda Romero do Espírito Santo</h3>
+                        <p class="text-verdeMusgo font-bold text-xs tracking-tighter mb-6 uppercase">OAB/MS 22.127</p>
+                        <p class="text-gray-700 leading-relaxed mb-6 italic">
+                            Professora e advogada sócia. Pós-graduada em Direito Penal e Processual Penal pela EDAMP – Escola de Direito do Ministério Público.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-bege text-[10px] px-2 py-1 uppercase font-bold text-marsala">Direito Criminal</span>
+                            <span class="bg-bege text-[10px] px-2 py-1 uppercase font-bold text-marsala">Eleitoral</span>
+                            <span class="bg-bege text-[10px] px-2 py-1 uppercase font-bold text-marsala">Contratos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 md:p-12 flex flex-col md:flex-row gap-10 items-start shadow-xl border-t-8 border-verdeMusgo" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-full md:w-56 h-72 bg-gray-200 grayscale hover:grayscale-0 transition-all duration-500 overflow-hidden shadow-lg">
+                        <img src="./img/josetti.jpeg" class="w-full h-full object-cover" alt="Natália">
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-3xl font-serif text-marsala mb-1">Natália XXXXX</h3>
+                        <p class="text-verdeMusgo font-bold text-xs tracking-tighter mb-6 uppercase">OAB/MS XXXXX</p>
+                        <p class="text-gray-700 leading-relaxed mb-6 italic">
+                            Especialista em Direito Público com mais de dez anos de experiência. Professora da Faculdade Novoeste e Analista Comportamental PSC.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-bege text-[10px] px-2 py-1 uppercase font-bold text-verdeMusgo">Administrativo</span>
+                            <span class="bg-bege text-[10px] px-2 py-1 uppercase font-bold text-verdeMusgo">Constitucional</span>
+                            <span class="bg-bege text-[10px] px-2 py-1 uppercase font-bold text-verdeMusgo">Imobiliário</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contato" class="bg-white border-t-4 border-begeDark pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-3 gap-16">
+            <div class="lg:col-span-1">
+                <h2 class="text-marsala font-serif text-4xl mb-8">Contatos</h2>
+                <div class="space-y-8">
+                    <div>
+                        <p class="text-xs uppercase font-bold text-verdeMusgo tracking-widest mb-2">Localização</p>
+                        <p class="text-gray-600 font-light">Rua Exemplo, 1234 — Campo Grande, MS<br>CEP: 79000-000</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase font-bold text-verdeMusgo tracking-widest mb-2">Telefones</p>
+                        <p class="text-gray-600 font-light">(67) 3333-3333<br>(67) 99999-9999 (WhatsApp)</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase font-bold text-verdeMusgo tracking-widest mb-2">E-mail</p>
+                        <p class="text-gray-600 font-light">contato@josettiromero.com.br</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 h-[450px] shadow-2xl rounded-sm overflow-hidden" data-aos="fade-left">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119614.3986427303!2d-54.71008603681729!3d-20.465191599999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9486e60b0e5170f3%3A0xc067ef51a660d294!2sCampo%20Grande%2C%20MS!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 mt-24 pt-8 border-t border-begeDark flex flex-col md:flex-row justify-between items-center text-gray-400 text-[10px] tracking-widest uppercase font-bold">
+            <p>© 2026 Josetti & Romero Advocacia. Todos os direitos reservados.</p>
+            <p class="mt-4 md:mt-0">Desenvolvido com foco na excelência</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1200,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>
